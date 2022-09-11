@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<style>
+			body 
+			{
+				font-family: Monospace;
+				background-color: #F5F5F5;
+				margin: 0px;
+				overflow: hidden;
+			}
+			#container {
+				height: 500 px;
+				width: 1000 px;
+			}
+		</style>
+		<script src="lib/three.js"></script>
+		<script src="lib/UnpackDepthRGBAShader.js"></script>
+		<script src="lib/ShadowMapViewer.js"></script>
+		<script src="lib/Detector.js"></script>
+		<script src="lib/OrbitControls.js"></script>
+		<script src="lib/stats.min.js"></script>
+		<script src="lib/dat.gui.min.js"></script>
+		<script src="lib/OBJLoader.js"></script>
+		<script src="lib/THREEx.KeyboardState.js"></script>
+		<script src="lib/THREEx.FullScreen.js"></script>
+		<script src="lib/THREEx.WindowResize.js"></script>
+		<script src="lib/FXAAShader.js"></script>
+		<script src="lib/EffectComposer.js"></script>
+		<script>
+			function getParameterByName(name) 
+			{
+				var match = RegExp('[?&]' + name + '=([^&]*)')
+				.exec(window.location.search);
+				return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+			}
+			var loadScript = getParameterByName('load');
+			if ('undefined' !== typeof loadScript) 
+			{
+				if ( loadScript !== null ) {
+					var thescript = document.createElement('script');
+					thescript.setAttribute('type','text/javascript');
+					thescript.setAttribute('src',loadScript);
+					document.getElementsByTagName('head')[0].appendChild(thescript);
+				}
+			}
+			else {
+				alert(loadScript);
+			}
+		</script>
+	</head>
+	<body>
+		<div id="container">
+		</div>
+		<script>
+			if ( ! Detector.webgl )
+			{
+				Detector.addGetWebGLMessage();
+			}
+			else 
+			{
+				elem = document.createElement("div");
+				elem.id = 'myID';
+				elem.id = 'myID';
+				elem.innerHTML =
+				[
+				'<br><form name="run"><label>&nbsp;Select script:</label>',
+					'<select name="myCode"',
+						'OnChange="location.href=run.myCode.options[selectedIndex].value">',
+					    '<option selected>Select code',,
+						'<option value="?load=myCode/2/CreateScene.js">Set The Scene',
+						'<option value="?load=myCode/1/CreateNewScene.js">Set The New Scene',
+					'</select>'
+				].join('\n');
+				if ('undefined' !== typeof loadScript)
+					{
+						elem.innerHTML = elem.innerHTML + "&nbsp;Showing " + loadScript;
+					}
+					elem.innerHTML = elem.innerHTML + "</form><br/>";
+					document.body.insertBefore(elem,document.body.childNodes[0])
+			}
+		</script>
+	</body>
+</html>
